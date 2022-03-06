@@ -1,0 +1,24 @@
+import os
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+f = [ f for f in os.listdir() if f[-4:].lower() == '.pdf' ][0]
+print('In: ' + f)
+inpdf = PdfFileReader(f)
+
+while True:
+
+    a = int(input('start from page: '))
+    b = int(input('end at page: '))
+
+    writer = PdfFileWriter()
+    for j in range(a-1,b):
+        writer.addPage(inpdf.getPage(j))
+        outpdf = f[:-4] + '_p' + str(a) + '-' + str(b) + '.pdf'
+    writer.write(open(outpdf, 'wb'))
+    print('Out: ' + outpdf)
+    ask = str(input('continue? or input any keys to break: '))
+    if ask == '':
+        print('')
+        pass
+    else:
+        break
