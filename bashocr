@@ -1,0 +1,1 @@
+for file in *.pdf; do ocrmypdf "${file}" "${file%.*}_ocr.${file##*.}"; done
